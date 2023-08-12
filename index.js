@@ -6,10 +6,20 @@ const port = process.env.port || 1000;
 
 require("dotenv").config();
 
+//router here
+const categoryRoute = require("./routes/category")
+
+
+
+
+
 
 // middleware
 app.use(cors());
 app.use(express.json());
+
+
+
 
 
 
@@ -33,6 +43,9 @@ async function run() {
      client.connect();
     //  work on
 
+    //from routes
+    app.use("/category",categoryRoute);
+   
 
 
 
