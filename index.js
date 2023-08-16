@@ -8,6 +8,7 @@ require("dotenv").config();
 
 //router here
 const categoryRoute = require("./routes/category")
+const tourDetails = require("./routes/tourDetails")
 
 
 
@@ -45,6 +46,7 @@ async function run() {
 
     //from routes
     app.use("/category",categoryRoute);
+    app.use("/tourDetails",tourDetails);
    
 
 
