@@ -9,6 +9,8 @@ require("dotenv").config();
 //router here
 const categoryRoute = require("./routes/category")
 const tourDetails = require("./routes/tourDetails")
+const topDestinations = require("./routes/TopDestination")
+const allHotels = require("./routes/hotels")
 
 
 
@@ -47,6 +49,8 @@ async function run() {
     //from routes
     app.use("/category",categoryRoute);
     app.use("/tourDetails",tourDetails);
+    app.use("/top-destinations",topDestinations)
+    app.use("/all-hotels",topDestinations)
    
 
 
