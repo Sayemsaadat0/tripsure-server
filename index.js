@@ -34,11 +34,14 @@ async function run() {
     client.connect();
     //  work on
     const categoryCollection = client.db("tripsureDB").collection("hotels");
+    const resturantsCollection = client.db("tripsureDB").collection("restaurant");
     //from routes
     app.use("/category", categoryRoute);
     app.use("/tourDetails", tourDetails);
     app.use("/top-destinations", topDestinations);
     app.use("/all-hotels", topDestinations);
+
+
 
     //extternal hotels add
 
@@ -51,6 +54,21 @@ async function run() {
       const result = await categoryCollection.insertOne(newhotels);
       res.send(result);
     });
+
+    app.get("/dashboard/addresturants", async (req, res) => {
+      const result = await resturantsCollection.find().toArray();
+      res.send(result);
+    });
+    app.post("/dashboard/addresturants", async (req, res) => {
+      const newresturants = req.body;
+      console.log(newresturants)
+      const result = await resturantsCollection.insertOne(newresturants);
+      res.send(result);
+    });
+
+
+
+
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
