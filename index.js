@@ -12,6 +12,7 @@ const tourDetails = require("./routes/tourDetails");
 const topDestinations = require("./routes/TopDestination");
 const allHotels = require("./routes/hotels");
 const allresturants = require('./routes/restaurants')
+const searchAllDatas = require('./routes/searchResult')
 // middleware
 app.use(cors());
 app.use(express.json());
@@ -40,8 +41,9 @@ async function run() {
     app.use("/tourDetails", tourDetails);
     app.use("/top-destinations", topDestinations);
     app.use("/all-hotels", topDestinations);
-     app.use('/dashboard/addhotels',allHotels);
-     app.use('/dashboard/addresturants',allresturants);
+    app.use('/dashboard/addhotels',allHotels);
+    app.use('/dashboard/addresturants', allresturants);
+    app.use("/searchResult", searchAllDatas);
 
 
     //extternal hotels add
