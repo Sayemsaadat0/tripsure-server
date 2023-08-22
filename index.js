@@ -11,16 +11,8 @@ const categoryRoute = require("./routes/category");
 const tourDetails = require("./routes/tourDetails");
 const topDestinations = require("./routes/TopDestination");
 const allHotels = require("./routes/hotels");
-const allresturants = require("./routes/restaurants");
-
-
-
-
-
-
-
-
-
+const allresturants = require('./routes/restaurants')
+const searchAllDatas = require('./routes/searchResult')
 // middleware
 app.use(cors());
 app.use(express.json());
@@ -47,31 +39,12 @@ async function run() {
     app.use("/tourDetails", tourDetails);
     app.use("/top-destinations", topDestinations);
     app.use("/all-hotels", topDestinations);
-    app.use("/dashboard/addhotels", allHotels);
-    app.use("/dashboard/addresturants", allresturants);
+    app.use('/dashboard/addhotels',allHotels);
+    app.use('/dashboard/addresturants', allresturants);
+    app.use("/searchResult", searchAllDatas);
 
-    //extternal hotels add
 
-    // app.get("/dashboard/addhotels", async (req, res) => {
-    //   const result = await categoryCollection.find().toArray();
-    //   res.send(result);
-    // });
-    // app.post("/dashboard/addhotels", async (req, res) => {
-    //   const newhotels = req.body;
-    //   const result = await categoryCollection.insertOne(newhotels);
-    //   res.send(result);
-    // });
-
-    // app.get("/dashboard/addresturants", async (req, res) => {
-    //   const result = await resturantsCollection.find().toArray();
-    //   res.send(result);
-    // });
-    // app.post("/dashboard/addresturants", async (req, res) => {
-    //   const newresturants = req.body;
-    //   console.log(newresturants)
-    //   const result = await resturantsCollection.insertOne(newresturants);
-    //   res.send(result);
-    // });
+ 
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
