@@ -11,7 +11,7 @@ const categoryRoute = require("./routes/category");
 const tourDetails = require("./routes/tourDetails");
 const topDestinations = require("./routes/TopDestination");
 const allHotels = require("./routes/hotels");
-
+const allresturants = require('./routes/restaurants')
 // middleware
 app.use(cors());
 app.use(express.json());
@@ -33,38 +33,39 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     client.connect();
     //  work on
-    const categoryCollection = client.db("tripsureDB").collection("hotels");
-    const resturantsCollection = client.db("tripsureDB").collection("restaurant");
+    
+    
     //from routes
     app.use("/category", categoryRoute);
     app.use("/tourDetails", tourDetails);
     app.use("/top-destinations", topDestinations);
     app.use("/all-hotels", topDestinations);
-
+     app.use('/dashboard/addhotels',allHotels);
+     app.use('/dashboard/addresturants',allresturants);
 
 
     //extternal hotels add
 
-    app.get("/dashboard/addhotels", async (req, res) => {
-      const result = await categoryCollection.find().toArray();
-      res.send(result);
-    });
-    app.post("/dashboard/addhotels", async (req, res) => {
-      const newhotels = req.body;
-      const result = await categoryCollection.insertOne(newhotels);
-      res.send(result);
-    });
+    // app.get("/dashboard/addhotels", async (req, res) => {
+    //   const result = await categoryCollection.find().toArray();
+    //   res.send(result);
+    // });
+    // app.post("/dashboard/addhotels", async (req, res) => {
+    //   const newhotels = req.body;
+    //   const result = await categoryCollection.insertOne(newhotels);
+    //   res.send(result);
+    // });
 
-    app.get("/dashboard/addresturants", async (req, res) => {
-      const result = await resturantsCollection.find().toArray();
-      res.send(result);
-    });
-    app.post("/dashboard/addresturants", async (req, res) => {
-      const newresturants = req.body;
-      console.log(newresturants)
-      const result = await resturantsCollection.insertOne(newresturants);
-      res.send(result);
-    });
+    // app.get("/dashboard/addresturants", async (req, res) => {
+    //   const result = await resturantsCollection.find().toArray();
+    //   res.send(result);
+    // });
+    // app.post("/dashboard/addresturants", async (req, res) => {
+    //   const newresturants = req.body;
+    //   console.log(newresturants)
+    //   const result = await resturantsCollection.insertOne(newresturants);
+    //   res.send(result);
+    // });
 
 
 

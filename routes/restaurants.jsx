@@ -13,16 +13,17 @@ const client = new MongoClient(uri, {
   }
 });
 
-const categoryCollection = client.db("tripsureDB").collection("hotels");
-router.get('/', async (req, res) => {
-    const result = await categoryCollection.find().toArray();
+const resturantsCollection = client.db("tripsureDB").collection("restaurant");
+router.get("/", async (req, res) => {
+    const result = await resturantsCollection.find().toArray();
     res.send(result);
-})
-router.post("/", async (req, res) => {
-  const newhotels = req.body;
-  const result = await categoryCollection.insertOne(newhotels);
-  res.send(result);
-});
+  });
+  router.post("/", async (req, res) => {
+    const newresturants = req.body;
+    console.log(newresturants)
+    const result = await resturantsCollection.insertOne(newresturants);
+    res.send(result);
+  });
 
 
 module.exports = router;
