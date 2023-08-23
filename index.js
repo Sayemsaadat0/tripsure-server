@@ -18,6 +18,8 @@ const stayThingsAttractionReviews = require("./routes/stayThingsAttractionReview
 const restaurantAttractionReviews = require("./routes/restaurantAttractionReviews")
 const packages = require("./routes/packages")
 const travelDeals = require("./routes/TravelDeals")
+const allFamilyGuide = require("./routes/AllFamilyGuide")
+const familyDetails = require("./routes/familyDetails")
 
 
 
@@ -65,6 +67,8 @@ async function run() {
     app.use("/restaurantAttractionReviews",restaurantAttractionReviews)
     app.use("/packages",packages)
     app.use("/travelDeals",travelDeals)
+    app.use("/allFamilyGuide",allFamilyGuide)
+    app.use("/familyDetails",familyDetails)
    
 
 
