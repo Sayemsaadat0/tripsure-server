@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.njebycd.mongodb.net/?retryWrites=true&w=majority`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -14,20 +14,13 @@ const client = new MongoClient(uri, {
 });
 
 const categoryCollection = client.db("tripsureDB").collection("category");
-router.get('/', async (req, res) => {
-    const result = await categoryCollection.find().sort({"visitcount": 1 }).limit(10).toArray();
+
+
+router.get('/:country', async (req, res) => {
+    const country = req.params.country;
+    const query = {country: {$regex : country,$options:"i"} }
+    const result = await categoryCollection.find(query).limit(10).toArray();
     res.send(result);
-})
+  })
 
-
-router.get('/:id', async (req, res) => {
-    const id = req.params.id;
-    const query = {_id: new ObjectId(id)}
-    const result = await categoryCollection.findOne(query);
-    res.send(result);
-})
-
-
-
-
-module.exports = router;
+  module.exports = router;
