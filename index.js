@@ -11,6 +11,12 @@ const categoryRoute = require("./routes/category")
 const tourDetails = require("./routes/tourDetails")
 const topDestinations = require("./routes/TopDestination")
 const allHotels = require("./routes/hotels")
+const tourCountry = require("./routes/tourCountry")
+const restaurant = require("./routes/restaurant")
+const dothingsAttractionReviews = require("./routes/doThingsAttractionReviews")
+const stayThingsAttractionReviews = require("./routes/stayThingsAttractionReviews")
+const restaurantAttractionReviews = require("./routes/restaurantAttractionReviews")
+const packages = require("./routes/packages")
 
 
 
@@ -50,7 +56,13 @@ async function run() {
     app.use("/category",categoryRoute);
     app.use("/tourDetails",tourDetails);
     app.use("/top-destinations",topDestinations)
-    app.use("/all-hotels",topDestinations)
+    app.use("/all-hotels",allHotels)
+    app.use("/tourCountry",tourCountry)
+    app.use("/restaurant",restaurant)
+    app.use("/doThingsAttractionReviews",dothingsAttractionReviews)
+    app.use("/stayThingsAttractionReviews",stayThingsAttractionReviews)
+    app.use("/restaurantAttractionReviews",restaurantAttractionReviews)
+    app.use("/packages",packages)
    
 
 
