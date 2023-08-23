@@ -13,11 +13,17 @@ const client = new MongoClient(uri, {
   }
 });
 
-const categoryCollection = client.db("tripsureDB").collection("packages");
+const packageCollection = client.db("tripsureDB").collection("packages");
 
 router.get('/', async (req, res) => {
-    const result = await categoryCollection.find().toArray();
+    const result = await packageCollection.find().toArray();
     res.send(result);
+})
+router.get('/:id', async (req, res) => {
+  const id = req.params.id;
+  const query = {_id: new ObjectId(id)}
+  const result = await packageCollection.findOne(query);
+  res.send(result);
 })
 
 
