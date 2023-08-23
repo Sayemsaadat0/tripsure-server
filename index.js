@@ -13,6 +13,7 @@ const topDestinations = require("./routes/TopDestination");
 const allHotels = require("./routes/hotels");
 const allresturants = require('./routes/restaurants')
 const searchAllDatas = require('./routes/searchResult')
+const addReview = require('./routes/addReview')
 // middleware
 app.use(cors());
 app.use(express.json());
@@ -44,31 +45,7 @@ async function run() {
     app.use('/dashboard/addhotels',allHotels);
     app.use('/dashboard/addresturants', allresturants);
     app.use("/searchResult", searchAllDatas);
-
-
-    //extternal hotels add
-
-    // app.get("/dashboard/addhotels", async (req, res) => {
-    //   const result = await categoryCollection.find().toArray();
-    //   res.send(result);
-    // });
-    // app.post("/dashboard/addhotels", async (req, res) => {
-    //   const newhotels = req.body;
-    //   const result = await categoryCollection.insertOne(newhotels);
-    //   res.send(result);
-    // });
-
-    // app.get("/dashboard/addresturants", async (req, res) => {
-    //   const result = await resturantsCollection.find().toArray();
-    //   res.send(result);
-    // });
-    // app.post("/dashboard/addresturants", async (req, res) => {
-    //   const newresturants = req.body;
-    //   console.log(newresturants)
-    //   const result = await resturantsCollection.insertOne(newresturants);
-    //   res.send(result);
-    // });
-
+    app.use('/addReview', addReview)
 
 
 
