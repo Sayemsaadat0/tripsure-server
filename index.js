@@ -13,6 +13,7 @@ const topDestinations = require("./routes/TopDestination");
 const allHotels = require("./routes/hotels");
 const allresturants = require('./routes/restaurants')
 const allpackges = require('./routes/packages')
+
 // middleware
 app.use(cors());
 app.use(express.json());
@@ -44,11 +45,7 @@ async function run() {
      app.use('/dashboard/addhotels',allHotels);
      app.use('/dashboard/addresturants',allresturants);
      app.use('/dashboard/packages',allpackges);
-
-
-    
-
-
+     
 
 
     // Send a ping to confirm a successful connection
