@@ -20,6 +20,7 @@ const dothingsAttractionReviews = require("./routes/doThingsAttractionReviews")
 const stayThingsAttractionReviews = require("./routes/stayThingsAttractionReviews")
 const restaurantAttractionReviews = require("./routes/restaurantAttractionReviews")
 const packages = require("./routes/packages")
+const travelDeals = require("./routes/TravelDeals")
 
 
 
@@ -66,6 +67,7 @@ async function run() {
     app.use("/stayThingsAttractionReviews",stayThingsAttractionReviews)
     app.use("/restaurantAttractionReviews",restaurantAttractionReviews)
     app.use("/packages",packages)
+    app.use("/travelDeals",travelDeals)
    
 
 
