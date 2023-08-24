@@ -32,9 +32,17 @@ router.put('/:email',async (req, res) => {
   console.log(result)
 })
 
-router.get('/', (req, res) => {
-    res.send('i am from users file')
+router.get('/', async(req, res) => {
+  const result = await usersCollection.find().toArray();
+  res.send(result);
 })
 
+router.delete('/:id',async(req,res) =>{
+  const id = req.params.id
+  console.log(id)
+  const query = {_id: new ObjectId(id)}
+  const result = await usersCollection.deleteOne(query)
+  res.send(result)
+})
 
 module.exports = router;

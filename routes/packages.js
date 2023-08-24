@@ -27,6 +27,11 @@ router.get('/:id', async (req, res) => {
 })
 
 
+router.post("/", async (req, res) => {
+  const newpackges = req.body;
+  const result = await packageCollection.insertOne(newpackges);
+  res.send(result);
+});
 
 
 module.exports = router;
