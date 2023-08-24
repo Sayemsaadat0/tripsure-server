@@ -37,6 +37,65 @@ router.get('/', async(req, res) => {
   res.send(result);
 })
 
+
+
+
+
+ // role admin // eivabe instructor korbo
+ router.get('/:email', async (req, res) => {
+  const email = req.params.email;
+  
+  const query = { email: email }
+  const user = await usersCollection.findOne(query);
+  const result = { admin: user?.role === 'admin' }
+  res.send(result);
+})
+
+// instructor
+router.get('/:email', async (req, res) => {
+  const email = req.params.email;
+
+  const query = { email: email }
+  const user = await usersCollection.findOne(query);
+  const result = { operator: user?.role === 'operator' }
+  res.send(result);
+})
+
+
+
+router.patch('/:id', async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  const filter = { _id: new ObjectId(id) };
+  const updateDoc = {
+    $set: {
+      role: 'admin'
+    },
+  };
+
+  const result = await usersCollection.updateOne(filter, updateDoc);
+  res.send(result);
+
+})
+
+// operator
+router.patch('/:id',async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  const filter = { _id: new ObjectId(id) };
+  const updateDoc = {
+    $set: {
+      role: 'operator'
+    },
+  };
+
+  const result = await usersCollection.updateOne(filter, updateDoc);
+  res.send(result);
+
+})
+
+
+
 router.delete('/:id',async(req,res) =>{
   const id = req.params.id
   console.log(id)
