@@ -15,6 +15,20 @@ const allresturants = require('./routes/restaurants')
 const allpackges = require('./routes/packages')
 const searchAllDatas = require('./routes/searchResult')
 const users = require('./routes/users')
+const tourCountry = require("./routes/tourCountry")
+const restaurant = require("./routes/restaurant")
+const dothingsAttractionReviews = require("./routes/doThingsAttractionReviews")
+const stayThingsAttractionReviews = require("./routes/stayThingsAttractionReviews")
+const restaurantAttractionReviews = require("./routes/restaurantAttractionReviews")
+const packages = require("./routes/packages")
+const travelDeals = require("./routes/TravelDeals")
+const allFamilyGuide = require("./routes/AllFamilyGuide")
+const familyDetails = require("./routes/familyDetails")
+
+
+
+
+
 
 // middleware
 app.use(cors());
@@ -50,6 +64,43 @@ async function run() {
     // app.use('/dashboard/addresturants', allresturants);
     app.use("/searchResult", searchAllDatas);
     app.use("/users", users)
+    app.use("/category",categoryRoute);
+    app.use("/tourDetails",tourDetails);
+    app.use("/top-destinations",topDestinations)
+    app.use("/all-hotels",allHotels)
+    app.use("/tourCountry",tourCountry)
+    app.use("/restaurant",restaurant)
+    app.use("/doThingsAttractionReviews",dothingsAttractionReviews)
+    app.use("/stayThingsAttractionReviews",stayThingsAttractionReviews)
+    app.use("/restaurantAttractionReviews",restaurantAttractionReviews)
+    app.use("/packages",packages)
+    app.use("/travelDeals",travelDeals)
+    app.use("/allFamilyGuide",allFamilyGuide)
+    app.use("/familyDetails",familyDetails)
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     
