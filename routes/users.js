@@ -19,21 +19,43 @@ const client = new MongoClient(uri, {
 
 const usersCollection = client.db("tripsureDB").collection("users");
 
-router.put('/:email',async (req, res) => {
+router.put('/:email', async (req, res) => {
   const email = req.params.email
   const userData = req.body
-  const query = {email : email}
-  const options = {upsert: true}
+  const query = { email: email }
+  const options = { upsert: true }
   const updateDoc = {
     $set: userData
   }
   const result = await usersCollection.updateOne(query, updateDoc, options)
   res.send(result)
-  console.log(result)
 })
 
-router.get('/', (req, res) => {
-    res.send('i am from users file')
+router.get('/', async (req, res) => {
+  const result = await usersCollection.find().toArray()
+  res.send(result)
+})
+
+router.get('/:email', async (req, res) => {
+  const email = req.params.email
+  const filter = { email: email }
+  const result = await usersCollection.findOne(filter)
+  res.send(result)
+})
+
+router.patch('/:email', async (req, res) => {
+  const email = req.params.email 
+  const coverPhoto = req.body
+  console.log(coverPhoto)
+  const query = {email: email}
+  const updateDoc = {
+    $set:{
+      coverPhoto: coverPhoto
+    }
+  }
+  const result = await usersCollection.updateOne(query,updateDoc)
+  res.send(result)
+  console.log(result)
 })
 
 
