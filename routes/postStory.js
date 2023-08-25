@@ -12,27 +12,22 @@ const client = new MongoClient(uri, {
   },
 });
 
-const addReviewCollection = client.db("tripsureDB").collection("review");
 
-router.put("/:email", async (req, res) => {
-  const email = req.params.email;
-  const review = req.body;
-  const filter = { email: email };
-  const options = { upsert: true };
-  const updateDoc = {
-    $set: review,
-  };
-  const result = await addReviewCollection.updateOne(
-    filter,
-    updateDoc,
-    options
-  );
+
+const postStoryCollection = client.db("tripsureDB").collection("postStory");
+
+router.post("/", async (req, res) => {
+  const newPost = req.body;
+  const result = await postStoryCollection.insertOne(newPost);
   res.send(result);
+  console.log(result);
 });
 
+
 router.get("/", async (req, res) => {
-  const result = await addReviewCollection.find().toArray();
+  const result = await postStoryCollection.find().toArray();
   res.send(result);
+  console.log(result);
 });
 
 module.exports = router;

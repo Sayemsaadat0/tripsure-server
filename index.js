@@ -11,9 +11,10 @@ const categoryRoute = require("./routes/category");
 const tourDetails = require("./routes/tourDetails");
 const topDestinations = require("./routes/TopDestination");
 const allHotels = require("./routes/hotels");
-const allresturants = require('./routes/restaurants')
-const searchAllDatas = require('./routes/searchResult')
-const addReview = require('./routes/addReview')
+const allresturants = require("./routes/restaurants");
+const searchAllDatas = require("./routes/searchResult");
+const addReview = require("./routes/addReview");
+const postStory = require("./routes/postStory");
 // middleware
 app.use(cors());
 app.use(express.json());
@@ -35,20 +36,18 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     client.connect();
     //  work on
-    
-    
+
     //from routes
     app.use("/category", categoryRoute);
     app.use("/tourDetails", tourDetails);
     app.use("/top-destinations", topDestinations);
     app.use("/all-hotels", topDestinations);
-    app.use('/dashboard/addhotels',allHotels);
-    app.use('/dashboard/addresturants', allresturants);
+    app.use("/dashboard/addhotels", allHotels);
+    app.use("/dashboard/addresturants", allresturants);
     app.use("/searchResult", searchAllDatas);
-    app.use('/addReview', addReview)
-
-
-
+    app.use("/addReview", addReview);
+    app.use("/postStory", postStory);
+  
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
