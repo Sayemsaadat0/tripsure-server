@@ -24,9 +24,8 @@ const packages = require("./routes/packages")
 const travelDeals = require("./routes/TravelDeals")
 const allFamilyGuide = require("./routes/AllFamilyGuide")
 const familyDetails = require("./routes/familyDetails")
-
-
-
+const addToFavoritePackage = require("./routes/AddToFavoritePackage")
+const getFavoritePackage = require("./routes/getFavoritePackageData")
 
 
 
@@ -35,6 +34,8 @@ app.use(cors());
 app.use(express.json());
 
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
+
+
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.njebycd.mongodb.net/?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, {
@@ -77,6 +78,8 @@ async function run() {
     app.use("/travelDeals",travelDeals)
     app.use("/allFamilyGuide",allFamilyGuide)
     app.use("/familyDetails",familyDetails)
+    app.use("/addToFavoritePackage",addToFavoritePackage)
+    app.use("/getFavoritePackage",getFavoritePackage)
    
 
 
