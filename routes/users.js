@@ -46,7 +46,7 @@ router.get('/:email', async (req, res) => {
 router.patch('/:email', async (req, res) => {
   const email = req.params.email 
   const coverPhoto = req.body
-  console.log(coverPhoto)
+  console.log('cover',coverPhoto)
   const query = {email: email}
   const updateDoc = {
     $set:{
