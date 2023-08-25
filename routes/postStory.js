@@ -20,14 +20,14 @@ router.post("/", async (req, res) => {
   const newPost = req.body;
   const result = await postStoryCollection.insertOne(newPost);
   res.send(result);
-  console.log(result);
+ 
 });
 
 
 router.get("/", async (req, res) => {
   const result = await postStoryCollection.find().toArray();
   res.send(result);
-  console.log(result);
+
 });
 
 module.exports = router;

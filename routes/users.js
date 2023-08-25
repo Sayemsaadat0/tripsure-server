@@ -46,7 +46,7 @@ router.get('/:email', async (req, res) => {
 router.patch('/:email', async (req, res) => {
   const email = req.params.email 
   const coverPhoto = req.body
-  console.log('cover',coverPhoto)
+
   const query = {email: email}
   const updateDoc = {
     $set:{
@@ -55,12 +55,12 @@ router.patch('/:email', async (req, res) => {
   }
   const result = await usersCollection.updateOne(query,updateDoc)
   res.send(result)
-  console.log(result)
+
 })
 
 router.delete('/:id',async(req,res) =>{
   const id = req.params.id
-  console.log(id)
+
   const query = {_id: new ObjectId(id)}
   const result = await usersCollection.deleteOne(query)
   res.send(result)

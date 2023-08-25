@@ -27,7 +27,7 @@ router.get('/:email/favorite-packages', async (req, res) => {
         }
 
         const favoritePackageIds = user.favoritePackageIds || [];
-        console.log(favoritePackageIds);
+   
         const favoritePackages = await packagesCollection.find({
             _id: { $in: favoritePackageIds.map(id => new ObjectId(id)) }
         }).toArray();
