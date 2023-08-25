@@ -20,20 +20,14 @@ const packages = require("./routes/packages")
 const travelDeals = require("./routes/TravelDeals")
 const allFamilyGuide = require("./routes/AllFamilyGuide")
 const familyDetails = require("./routes/familyDetails")
-
-
-
+const addToFavoritePackage = require("./routes/AddToFavoritePackage")
+const getFavoritePackage = require("./routes/getFavoritePackageData")
 
 
 
 // middleware
 app.use(cors());
 app.use(express.json());
-
-
-
-
-
 
 
 
@@ -69,24 +63,9 @@ async function run() {
     app.use("/travelDeals",travelDeals)
     app.use("/allFamilyGuide",allFamilyGuide)
     app.use("/familyDetails",familyDetails)
+    app.use("/addToFavoritePackage",addToFavoritePackage)
+    app.use("/getFavoritePackage",getFavoritePackage)
    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -100,20 +79,6 @@ async function run() {
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
