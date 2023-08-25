@@ -29,6 +29,9 @@ const getFavoritePackage = require("./routes/getFavoritePackageData")
 
 
 
+
+const addReview = require("./routes/addReview");
+const postStory = require("./routes/postStory");
 // middleware
 app.use(cors());
 app.use(express.json());
@@ -81,10 +84,9 @@ async function run() {
     app.use("/addToFavoritePackage",addToFavoritePackage)
     app.use("/getFavoritePackage",getFavoritePackage)
    
-
-
-
-
+    app.use("/addReview", addReview);
+    app.use("/postStory", postStory);
+  
 
 
 
