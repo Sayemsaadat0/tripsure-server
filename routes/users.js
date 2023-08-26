@@ -46,11 +46,27 @@ router.get('/:email', async (req, res) => {
 router.patch('/:email', async (req, res) => {
   const email = req.params.email 
   const coverPhoto = req.body
-
   const query = {email: email}
   const updateDoc = {
     $set:{
-      coverPhoto: coverPhoto
+      coverPhoto: coverPhoto.coverPhoto
+    }
+  }
+  const result = await usersCollection.updateOne(query,updateDoc)
+  res.send(result)
+  console.log(result)
+})
+
+router.put('/:email', async (req, res) => {
+  const email = req.params.email 
+  const body = req.body
+  console.log('cover',body)
+  const query = {email: email}
+  const updateDoc = {
+    $set:{
+      phone:body.phone,
+      gender: body.gender,
+      country: body.country
     }
   }
   const result = await usersCollection.updateOne(query,updateDoc)
