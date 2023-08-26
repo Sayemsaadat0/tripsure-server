@@ -68,6 +68,8 @@ async function run() {
     // app.use('/dashboard/addresturants', allresturants);
     app.use("/searchResult", searchAllDatas);
     app.use("/users", users)
+    app.use("/users/admin", users)
+    app.use("/users/operator", users)
     app.use("/category",categoryRoute);
     app.use("/tourDetails",tourDetails);
     app.use("/top-destinations",topDestinations)
@@ -83,7 +85,6 @@ async function run() {
     app.use("/familyDetails",familyDetails)
     app.use("/addToFavoritePackage",addToFavoritePackage)
     app.use("/getFavoritePackage",getFavoritePackage)
-   
     app.use("/addReview", addReview);
     app.use("/postStory", postStory);
   
