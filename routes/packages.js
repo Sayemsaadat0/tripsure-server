@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.njebycd.mongodb.net/?retryWrites=true&w=majority`;
+
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -18,11 +19,6 @@ router.get('/', async (req, res) => {
     const result = await packageCollection.find().toArray();
     res.send(result);
 })
-router.post("/", async (req, res) => {
-  const newpackges = req.body;
-  const result = await packageCollection.insertOne(newpackges);
-  res.send(result);
-});
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
     const query = {_id: new ObjectId(id)}
@@ -31,6 +27,11 @@ router.get('/:id', async (req, res) => {
 })
 
 
+router.post("/", async (req, res) => {
+  const newpackges = req.body;
+  const result = await packageCollection.insertOne(newpackges);
+  res.send(result);
+});
 
 
 module.exports = router;
