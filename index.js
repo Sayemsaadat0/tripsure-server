@@ -14,6 +14,7 @@ const allHotels = require("./routes/hotels");
 const allresturants = require('./routes/restaurants')
 const searchAllDatas = require('./routes/searchResult')
 const users = require('./routes/users')
+const story = require ('./routes/story')
 
 // middleware
 app.use(cors());
@@ -45,6 +46,7 @@ async function run() {
     app.use('/dashboard/addresturants', allresturants);
     app.use("/searchResult", searchAllDatas);
     app.use("/users", users)
+    app.use('/story', story)
 
 
  
