@@ -17,7 +17,7 @@ const categoryCollection = client.db("tripsureDB").collection("category");
 
 
 router.get('/:country', async (req, res) => {
-    const country = req.params.country;
+  const country = req.params.country;
     const query = {country: {$regex : country,$options:"i"} }
     const result = await categoryCollection.find(query).limit(10).toArray();
     res.send(result);

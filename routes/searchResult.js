@@ -21,14 +21,13 @@ router.get("/", async (req, res) => {
 });
 
 //get individual data of search
-router.get("/searchResult/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const id = req.params.id;
-  console.log(id);
   const restaurantsResult = await resturantsCollection.find().toArray();
   const hotelsResult = await hotelsCollection.find().toArray();
   const combineResults = [...restaurantsResult, ...hotelsResult];
-  const selectedCard = combineResults.find((data) => data._id.toString() == id);
-  console.log(selectedCard);
+  const selectedCard = combineResults.find(data => data._id.toString() == id)
+  console.log(selectedCard)
   return res.send(selectedCard);
 });
 
