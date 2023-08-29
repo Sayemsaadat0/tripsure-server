@@ -26,6 +26,7 @@ const allFamilyGuide = require("./routes/AllFamilyGuide")
 const familyDetails = require("./routes/familyDetails")
 const addToFavoritePackage = require("./routes/AddToFavoritePackage")
 const getFavoritePackage = require("./routes/getFavoritePackageData")
+const stripe = require("./routes/stripe")
 
 
 
@@ -86,6 +87,7 @@ async function run() {
    
     app.use("/addReview", addReview);
     app.use("/postStory", postStory);
+    app.use("/stripe-payment-intent", stripe);
   
 
 
