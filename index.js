@@ -33,6 +33,10 @@ const getFavoritePackage = require("./routes/getFavoritePackageData");
 const addReview = require("./routes/addReview");
 const postStory = require("./routes/postStory");
 const userguides = require("./routes/guides")
+const allresturants = require('./routes/restaurants')
+const searchAllDatas = require('./routes/searchResult')
+const users = require('./routes/users')
+const story = require ('./routes/story')
 
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
@@ -84,6 +88,11 @@ async function run() {
     app.use("/postStory", postStory);
     app.use("/addguide", userguides)
     app.use("/allguide", userguides)
+    app.use("/users", users)
+    app.use('/story', story)
+
+
+ 
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
