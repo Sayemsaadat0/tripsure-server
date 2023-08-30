@@ -41,16 +41,13 @@ router.get("/:category/:searchText", async (req, res) => {
   const searchText = req.params.searchText;
   const category = req.params.category;
   if (category === "hotels") {
-    const query = searchText
-      ? {
+    const query = searchText ? {
           hotelName: { $regex: new RegExp(searchText, "i") },
-        }
-      : {};
+        } : {};
     const result = await hotelsCollection.find(query).toArray();
     return res.send(result);
   } else if (category === "restaurant") {
-    const query = searchText
-      ? {
+    const query = searchText ? {
           title: { $regex: new RegExp(searchText, "i") },
         }
       : {};
