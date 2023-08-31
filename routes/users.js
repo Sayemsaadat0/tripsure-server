@@ -126,6 +126,19 @@ router.patch('/:id',async (req, res) => {
 
 })
 
+router.get("/", async (req, res) => {
+  const searchTerm = req.query.email;
+  console.log(searchTerm)
+
+  const query = searchTerm
+    ? {
+        email:  { $regex: searchTerm, $options: "i" },
+      }
+    : {};
+  const result = await usersCollection.find(query).toArray();
+  res.send(result);
+});
+
 
 
 router.delete('/:id',async(req,res) =>{
