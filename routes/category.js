@@ -14,6 +14,7 @@ const client = new MongoClient(uri, {
 });
 
 const categoryCollection = client.db("tripsureDB").collection("category");
+
 router.get('/:category', async (req, res) => {
     const category = req.params.category;
     const query = {categoryname: {$regex : category,$options:"i"} }

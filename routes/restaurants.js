@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
   });
   router.post("/", async (req, res) => {
     const newresturants = req.body;
-    console.log(newresturants)
+   
     const result = await resturantsCollection.insertOne(newresturants);
     res.send(result);
   });

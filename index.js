@@ -6,21 +6,39 @@ const port = process.env.port || 1000;
 
 require("dotenv").config();
 
+// middleware
+app.use(cors());
+app.use(express.json());
+
 //router here
 const categoryRoute = require("./routes/category");
 const tourDetails = require("./routes/tourDetails");
 const topDestinations = require("./routes/TopDestination");
 const allHotels = require("./routes/hotels");
-const allresturants = require('./routes/restaurants')
-const searchAllDatas = require('./routes/searchResult')
-const users = require('./routes/users')
+// const allresturants = require('./routes/restaurants')
+// const searchAllDatas = require('./routes/searchResult')
+// const users = require('./routes/users')
 const story = require ('./routes/story')
+const allresturants = require("./routes/restaurants");
+const allpackges = require("./routes/packages");
+const searchAllDatas = require("./routes/searchResult");
+const users = require("./routes/users");
+const tourCountry = require("./routes/tourCountry");
+const restaurant = require("./routes/restaurant");
+const dothingsAttractionReviews = require("./routes/doThingsAttractionReviews");
+const stayThingsAttractionReviews = require("./routes/stayThingsAttractionReviews");
+const restaurantAttractionReviews = require("./routes/restaurantAttractionReviews");
+const packages = require("./routes/packages");
+const travelDeals = require("./routes/TravelDeals");
+const allFamilyGuide = require("./routes/AllFamilyGuide");
+const familyDetails = require("./routes/familyDetails");
+const addToFavoritePackage = require("./routes/AddToFavoritePackage");
+const getFavoritePackage = require("./routes/getFavoritePackageData");
+const addReview = require("./routes/addReview");
+const postStory = require("./routes/postStory");
 
-// middleware
-app.use(cors());
-app.use(express.json());
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
-const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.njebycd.mongodb.net/?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, {
@@ -42,22 +60,40 @@ async function run() {
     app.use("/tourDetails", tourDetails);
     app.use("/top-destinations", topDestinations);
     app.use("/all-hotels", topDestinations);
-    app.use('/dashboard/addhotels',allHotels);
-    app.use('/dashboard/addresturants', allresturants);
+    app.use("/dashboard/addhotels", allHotels);
+    app.use("/dashboard/addresturants", allresturants);
+    app.use("/dashboard/packages", allpackges);
     app.use("/searchResult", searchAllDatas);
     app.use("/users", users)
     app.use('/story', story)
 
 
  
+    // app.use("/users", users);
+    app.use("/users/admin", users);
+    app.use("/users/operator", users);
+    app.use("/category", categoryRoute);
+    app.use("/tourDetails", tourDetails);
+    app.use("/top-destinations", topDestinations);
+    app.use("/all-hotels", allHotels);
+    app.use("/tourCountry", tourCountry);
+    app.use("/restaurant", restaurant);
+    app.use("/doThingsAttractionReviews", dothingsAttractionReviews);
+    app.use("/stayThingsAttractionReviews", stayThingsAttractionReviews);
+    app.use("/restaurantAttractionReviews", restaurantAttractionReviews);
+    app.use("/packages", packages);
+    app.use("/travelDeals", travelDeals);
+    app.use("/allFamilyGuide", allFamilyGuide);
+    app.use("/familyDetails", familyDetails);
+    app.use("/addToFavoritePackage", addToFavoritePackage);
+    app.use("/getFavoritePackage", getFavoritePackage);
+    app.use("/addReview", addReview);
+    app.use("/postStory", postStory);
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
-    console.log(
-      "connected to MongoDB!"
-    );
+    console.log("connected to MongoDB!");
   } finally {
-   
   }
 }
 run().catch(console.dir);

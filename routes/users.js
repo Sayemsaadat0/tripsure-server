@@ -46,7 +46,6 @@ router.get('/:email', async (req, res) => {
 router.patch('/:email', async (req, res) => {
   const email = req.params.email 
   const coverPhoto = req.body
-  console.log(coverPhoto)
   const query = {email: email}
   const updateDoc = {
     $set:{
@@ -55,13 +54,11 @@ router.patch('/:email', async (req, res) => {
   }
   const result = await usersCollection.updateOne(query,updateDoc)
   res.send(result)
-  console.log(result)
 })
 
 router.put('/:email', async (req, res) => {
   const email = req.params.email 
   const body = req.body
-  console.log('cover',body)
   const query = {email: email}
   const updateDoc = {
     $set:{
@@ -72,8 +69,71 @@ router.put('/:email', async (req, res) => {
   }
   const result = await usersCollection.updateOne(query,updateDoc)
   res.send(result)
-  console.log(result)
+
 })
 
+
+
+
+
+ // role admin // eivabe instructor korbo
+ router.get('/:email', async (req, res) => {
+  const email = req.params.email;
+  
+  const query = { email: email }
+  const user = await usersCollection.findOne(query);
+  const result = { admin: user?.role === 'admin' }
+  res.send(result);
+})
+
+// instructor
+router.get('/:email', async (req, res) => {
+  const email = req.params.email;
+  const query = { email: email }
+  const user = await usersCollection.findOne(query);
+  const result = { operator: user?.role === 'operator' }
+  res.send(result);
+})
+
+
+
+router.patch('/:id', async (req, res) => {
+  const id = req.params.id;
+  const filter = { _id: new ObjectId(id) };
+  const updateDoc = {
+    $set: {
+      role: 'admin'
+    },
+  };
+
+  const result = await usersCollection.updateOne(filter, updateDoc);
+  res.send(result);
+
+})
+
+// operator
+router.patch('/:id',async (req, res) => {
+  const id = req.params.id;
+  const filter = { _id: new ObjectId(id) };
+  const updateDoc = {
+    $set: {
+      role: 'operator'
+    },
+  };
+
+  const result = await usersCollection.updateOne(filter, updateDoc);
+  res.send(result);
+
+})
+
+
+
+router.delete('/:id',async(req,res) =>{
+  const id = req.params.id
+
+  const query = {_id: new ObjectId(id)}
+  const result = await usersCollection.deleteOne(query)
+  res.send(result)
+})
 
 module.exports = router;

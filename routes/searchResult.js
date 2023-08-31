@@ -20,7 +20,16 @@ router.get("/", async (req, res) => {
   res.send(result);
 });
 
-
+//get individual data of search
+router.get("/:id", async (req, res) => {
+  const id = req.params.id;
+  const restaurantsResult = await resturantsCollection.find().toArray();
+  const hotelsResult = await hotelsCollection.find().toArray();
+  const combineResults = [...restaurantsResult, ...hotelsResult];
+  const selectedCard = combineResults.find(data => data._id.toString() == id)
+  console.log(selectedCard)
+  return res.send(selectedCard);
+});
 
 router.get("/:category/:searchText", async (req, res) => {
   const searchText = req.params.searchText;
