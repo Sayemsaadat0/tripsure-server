@@ -15,18 +15,21 @@ const categoryRoute = require("./routes/category");
 const tourDetails = require("./routes/tourDetails");
 const topDestinations = require("./routes/TopDestination");
 const allHotels = require("./routes/hotels");
-const allpackges = require("./routes/packages");
-const tourCountry = require("./routes/tourCountry");
-const restaurant = require("./routes/restaurant");
-const dothingsAttractionReviews = require("./routes/doThingsAttractionReviews");
-const stayThingsAttractionReviews = require("./routes/stayThingsAttractionReviews");
-const restaurantAttractionReviews = require("./routes/restaurantAttractionReviews");
-const packages = require("./routes/packages");
-const travelDeals = require("./routes/TravelDeals");
-const allFamilyGuide = require("./routes/AllFamilyGuide");
-const familyDetails = require("./routes/familyDetails");
-const addToFavoritePackage = require("./routes/AddToFavoritePackage");
-const getFavoritePackage = require("./routes/getFavoritePackageData");
+const allpackges = require('./routes/packages')
+const tourCountry = require("./routes/tourCountry")
+const restaurant = require("./routes/restaurant")
+const dothingsAttractionReviews = require("./routes/doThingsAttractionReviews")
+const stayThingsAttractionReviews = require("./routes/stayThingsAttractionReviews")
+const restaurantAttractionReviews = require("./routes/restaurantAttractionReviews")
+const packages = require("./routes/packages")
+const travelDeals = require("./routes/TravelDeals")
+const allFamilyGuide = require("./routes/AllFamilyGuide")
+const familyDetails = require("./routes/familyDetails")
+const addToFavoritePackage = require("./routes/AddToFavoritePackage")
+const getFavoritePackage = require("./routes/getFavoritePackageData")
+const stripe = require("./routes/stripe")
+const payments = require("./routes/payments")
+const flights = require("./routes/flights")
 const addReview = require("./routes/addReview");
 const postStory = require("./routes/postStory");
 const userguides = require("./routes/guides")
@@ -86,6 +89,18 @@ async function run() {
     app.use("/allguide", userguides)
     app.use("/users", users)
     app.use('/story', story)
+    app.use("/stripe-payment-intent", stripe);
+    app.use("/payments", payments);
+    app.use("/flights", flights);
+  
+
+
+
+
+
+
+
+
 
 
  
