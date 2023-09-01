@@ -15,21 +15,28 @@ const categoryRoute = require("./routes/category");
 const tourDetails = require("./routes/tourDetails");
 const topDestinations = require("./routes/TopDestination");
 const allHotels = require("./routes/hotels");
-const allresturants = require("./routes/restaurants");
-const allpackges = require("./routes/packages");
-const searchAllDatas = require("./routes/searchResult");
-const users = require("./routes/users");
-const tourCountry = require("./routes/tourCountry");
-const restaurant = require("./routes/restaurant");
-const dothingsAttractionReviews = require("./routes/doThingsAttractionReviews");
-const stayThingsAttractionReviews = require("./routes/stayThingsAttractionReviews");
-const restaurantAttractionReviews = require("./routes/restaurantAttractionReviews");
-const packages = require("./routes/packages");
-const travelDeals = require("./routes/TravelDeals");
-const allFamilyGuide = require("./routes/AllFamilyGuide");
-const familyDetails = require("./routes/familyDetails");
-const addToFavoritePackage = require("./routes/AddToFavoritePackage");
-const getFavoritePackage = require("./routes/getFavoritePackageData");
+const allresturants = require('./routes/restaurants')
+const allpackges = require('./routes/packages')
+const searchAllDatas = require('./routes/searchResult')
+const users = require('./routes/users')
+const tourCountry = require("./routes/tourCountry")
+const restaurant = require("./routes/restaurant")
+const dothingsAttractionReviews = require("./routes/doThingsAttractionReviews")
+const stayThingsAttractionReviews = require("./routes/stayThingsAttractionReviews")
+const restaurantAttractionReviews = require("./routes/restaurantAttractionReviews")
+const packages = require("./routes/packages")
+const travelDeals = require("./routes/TravelDeals")
+const allFamilyGuide = require("./routes/AllFamilyGuide")
+const familyDetails = require("./routes/familyDetails")
+const addToFavoritePackage = require("./routes/AddToFavoritePackage")
+const getFavoritePackage = require("./routes/getFavoritePackageData")
+const stripe = require("./routes/stripe")
+const payments = require("./routes/payments")
+const flights = require("./routes/flights")
+
+
+
+
 const addReview = require("./routes/addReview");
 const postStory = require("./routes/postStory");
 const userguides = require("./routes/guides")
@@ -84,6 +91,20 @@ async function run() {
     app.use("/postStory", postStory);
     app.use("/addguide", userguides)
     app.use("/allguide", userguides)
+    app.use("/stripe-payment-intent", stripe);
+    app.use("/payments", payments);
+    app.use("/flights", flights);
+  
+
+
+
+
+
+
+
+
+
+
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
