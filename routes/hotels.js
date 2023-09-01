@@ -28,7 +28,7 @@ router.get('/:countryName', async (req, res) => {
 })
 router.post("/", async (req, res) => {
   const newhotels = req.body;
-  const result = await categoryCollection.insertOne(newhotels);
+  const result = await hotelCollection.insertOne(newhotels);
   res.send(result);
 });
 
