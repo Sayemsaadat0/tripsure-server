@@ -55,7 +55,6 @@ async function run() {
 
     //from routes
     app.use("/category", categoryRoute);
-    app.use("/tourDetails", tourDetails);
     app.use("/top-destinations", topDestinations);
     app.use("/all-hotels", topDestinations);
     app.use("/dashboard/addhotels", allHotels);
