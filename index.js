@@ -28,6 +28,7 @@ const addToFavoritePackage = require("./routes/AddToFavoritePackage")
 const getFavoritePackage = require("./routes/getFavoritePackageData")
 const stripe = require("./routes/stripe")
 const payments = require("./routes/payments")
+const flights = require("./routes/flights")
 
 
 
@@ -90,6 +91,7 @@ async function run() {
     app.use("/postStory", postStory);
     app.use("/stripe-payment-intent", stripe);
     app.use("/payments", payments);
+    app.use("/flights", flights);
   
 
 
