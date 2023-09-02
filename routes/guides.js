@@ -16,6 +16,7 @@ const client = new MongoClient(uri, {
 });
 
 const guideCollection = client.db("tripsureDB").collection("guides");
+
 router.get('/', async (req, res) => {
     const result = await guideCollection.find().toArray();
     res.send(result);
@@ -29,7 +30,7 @@ router.get('/', async (req, res) => {
 router.post("/", async (req, res) => {
   const newguide = req.body;
   console.log(newguide)
-  const result = await guideCollection.insertOne(newhotels);
+  const result = await guideCollection.insertOne(newguide);
   res.send(result);
 });
 
