@@ -11,6 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 //router here
+const favorite = require("./routes/favorite") // this route manage favorite 
 const categoryRoute = require("./routes/category");
 const tourDetails = require("./routes/tourDetails");
 const topDestinations = require("./routes/TopDestination");
@@ -33,8 +34,8 @@ const userguides = require("./routes/guides")
 const allresturants = require('./routes/restaurants')
 const searchAllDatas = require('./routes/searchResult')
 const users = require('./routes/users')
-const story = require ('./routes/story')
-
+const story = require('./routes/story')
+const flights = require('./routes/flights')
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.njebycd.mongodb.net/?retryWrites=true&w=majority`;
@@ -54,6 +55,8 @@ async function run() {
     //  work on
 
     //from routes
+    app.use("/favorite", favorite); // favorite route use 
+    app.use("/searchResult", searchAllDatas);
     app.use("/category", categoryRoute);
     app.use("/tourDetails", tourDetails);
     app.use("/top-destinations", topDestinations);
@@ -62,9 +65,7 @@ async function run() {
     app.use("/dashboard/addresturants", allresturants);
     app.use("/dashboard/packages", allpackges);
     app.use("/users", users);
-    app.use("/users/admin", users);
-    app.use("/users/operator", users);
-    app.use('/users/search',users)
+    app.use('/users/search', users)
     app.use("/category", categoryRoute);
     app.use("/tourDetails", tourDetails);
     app.use("/top-destinations", topDestinations);
@@ -84,11 +85,11 @@ async function run() {
     app.use("/postStory", postStory);
     app.use("/addguide", userguides)
     app.use("/allguide", userguides)
-    app.use("/users", users)
     app.use('/story', story)
+    app.use('/flights', flights)
 
 
- 
+
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });

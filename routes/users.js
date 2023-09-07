@@ -43,31 +43,33 @@ router.get('/:email', async (req, res) => {
   res.send(result)
 })
 
+// add cover photo from user profile
 router.patch('/:email', async (req, res) => {
-  const email = req.params.email 
+  const email = req.params.email
   const coverPhoto = req.body
-  const query = {email: email}
+  const query = { email: email }
   const updateDoc = {
-    $set:{
+    $set: {
       coverPhoto: coverPhoto.coverPhoto
     }
   }
-  const result = await usersCollection.updateOne(query,updateDoc)
+  const result = await usersCollection.updateOne(query, updateDoc)
   res.send(result)
 })
 
+// update user data from user profile
 router.put('/:email', async (req, res) => {
-  const email = req.params.email 
+  const email = req.params.email
   const body = req.body
-  const query = {email: email}
+  const query = { email: email }
   const updateDoc = {
-    $set:{
-      phone:body.phone,
+    $set: {
+      phone: body.phone,
       gender: body.gender,
       country: body.country
     }
   }
-  const result = await usersCollection.updateOne(query,updateDoc)
+  const result = await usersCollection.updateOne(query, updateDoc)
   res.send(result)
 
 })
@@ -76,10 +78,10 @@ router.put('/:email', async (req, res) => {
 
 
 
- // role admin // eivabe instructor korbo
- router.get('/:email', async (req, res) => {
+// role admin // eivabe instructor korbo
+router.get('/:email', async (req, res) => {
   const email = req.params.email;
-  
+
   const query = { email: email }
   const user = await usersCollection.findOne(query);
   const result = { admin: user?.role === 'admin' }
@@ -97,22 +99,37 @@ router.get('/:email', async (req, res) => {
 
 
 
-router.patch('/:id', async (req, res) => {
-  const id = req.params.id;
-  const filter = { _id: new ObjectId(id) };
+// router.patch('/:id', async (req, res) => {
+//   const id = req.params.id;
+//   const filter = { _id: new ObjectId(id) };
+//   console.log('make admin', id, filter)
+//   const updateDoc = {
+//     $set: {
+//       role: 'admin'
+//     },
+//   };
+
+//   const result = await usersCollection.updateOne(filter, updateDoc);
+//   res.send(result);
+// })
+
+router.put('/updateRole/:id', async (req, res) => {
+  const id = req.params.id
+  const role = req.body
+  console.log(role)
+  const filter = { _id: new ObjectId(id) }
   const updateDoc = {
     $set: {
-      role: 'admin'
-    },
-  };
-
-  const result = await usersCollection.updateOne(filter, updateDoc);
-  res.send(result);
-
+      role: role.role
+    }
+  }
+  const result = await usersCollection.updateOne(filter, updateDoc)
+  res.send(result)
 })
 
+
 // operator
-router.patch('/:id',async (req, res) => {
+router.patch('/:id', async (req, res) => {
   const id = req.params.id;
   const filter = { _id: new ObjectId(id) };
   const updateDoc = {
@@ -132,8 +149,8 @@ router.get("/", async (req, res) => {
 
   const query = searchTerm
     ? {
-        email:  { $regex: searchTerm, $options: "i" },
-      }
+      email: { $regex: searchTerm, $options: "i" },
+    }
     : {};
   const result = await usersCollection.find(query).toArray();
   res.send(result);
@@ -141,10 +158,10 @@ router.get("/", async (req, res) => {
 
 
 
-router.delete('/:id',async(req,res) =>{
+router.delete('/:id', async (req, res) => {
   const id = req.params.id
 
-  const query = {_id: new ObjectId(id)}
+  const query = { _id: new ObjectId(id) }
   const result = await usersCollection.deleteOne(query)
   res.send(result)
 })
