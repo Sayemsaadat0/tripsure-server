@@ -13,29 +13,36 @@ app.use(express.json());
 //router here
 const favorite = require("./routes/favorite") // this route manage favorite 
 const categoryRoute = require("./routes/category");
+const searchAllDatas = require('./routes/searchResult')
 const tourDetails = require("./routes/tourDetails");
 const topDestinations = require("./routes/TopDestination");
 const allHotels = require("./routes/hotels");
-const allpackges = require("./routes/packages");
-const tourCountry = require("./routes/tourCountry");
-const restaurant = require("./routes/restaurant");
-const dothingsAttractionReviews = require("./routes/doThingsAttractionReviews");
-const stayThingsAttractionReviews = require("./routes/stayThingsAttractionReviews");
-const restaurantAttractionReviews = require("./routes/restaurantAttractionReviews");
-const packages = require("./routes/packages");
-const travelDeals = require("./routes/TravelDeals");
-const allFamilyGuide = require("./routes/AllFamilyGuide");
-const familyDetails = require("./routes/familyDetails");
-const addToFavoritePackage = require("./routes/AddToFavoritePackage");
-const getFavoritePackage = require("./routes/getFavoritePackageData");
+const allpackges = require('./routes/packages')
+const users = require('./routes/users')
+const tourCountry = require("./routes/tourCountry")
+const restaurant = require("./routes/restaurant")
+const dothingsAttractionReviews = require("./routes/doThingsAttractionReviews")
+const stayThingsAttractionReviews = require("./routes/stayThingsAttractionReviews")
+const restaurantAttractionReviews = require("./routes/restaurantAttractionReviews")
+const packages = require("./routes/packages")
+const travelDeals = require("./routes/TravelDeals")
+const allFamilyGuide = require("./routes/AllFamilyGuide")
+const familyDetails = require("./routes/familyDetails")
+const addToFavoritePackage = require("./routes/AddToFavoritePackage")
+const getFavoritePackage = require("./routes/getFavoritePackageData")
+const stripe = require("./routes/stripe")
+const payments = require("./routes/payments")
+const flights = require("./routes/flights")
+
+
+
+
 const addReview = require("./routes/addReview");
 const postStory = require("./routes/postStory");
 const userguides = require("./routes/guides")
 const allresturants = require('./routes/restaurants')
-const searchAllDatas = require('./routes/searchResult')
-const users = require('./routes/users')
 const story = require('./routes/story')
-const flights = require('./routes/flights')
+
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.njebycd.mongodb.net/?retryWrites=true&w=majority`;
@@ -69,6 +76,13 @@ async function run() {
     app.use("/category", categoryRoute);
     app.use("/tourDetails", tourDetails);
     app.use("/top-destinations", topDestinations);
+    app.use("/users/admin", users);
+    app.use("/users/operator", users);
+    app.use('/users/search', users)
+    app.use("/searchResult", searchAllDatas);
+    // app.use("/category", categoryRoute);
+    // app.use("/tourDetails", tourDetails);
+    // app.use("/top-destinations", topDestinations);
     app.use("/all-hotels", allHotels);
     app.use("/tourCountry", tourCountry);
     app.use("/restaurant", restaurant);
@@ -87,6 +101,17 @@ async function run() {
     app.use("/allguide", userguides)
     app.use('/story', story)
     app.use('/flights', flights)
+    app.use("/stripe-payment-intent", stripe);
+    app.use("/payments", payments);
+    app.use("/flights", flights);
+  
+
+
+
+
+
+
+
 
 
 
