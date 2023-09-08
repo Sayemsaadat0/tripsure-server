@@ -22,5 +22,10 @@ router.post('/', async (req, res) => {
     res.send(result);
     
   })
+router.get('/pay', async (req, res) => {
+    const result = await paymentCollection.find().toArray();
+    res.send(result);
+    
+  })
 
   module.exports = router;
