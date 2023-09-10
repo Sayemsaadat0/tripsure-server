@@ -44,7 +44,6 @@ const addReview = require("./routes/addReview");
 const postStory = require("./routes/postStory");
 const userguides = require("./routes/guides")
 const allresturants = require('./routes/restaurants')
-
 const story = require ('./routes/story')
 
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
@@ -95,6 +94,7 @@ async function run() {
     app.use("/getFavoritePackage", getFavoritePackage);
     app.use("/addReview", addReview);
     app.use("/postStory", postStory);
+    app.use("/story", story)
     app.use("/addguide", userguides)
     app.use("/allguide", userguides)
     app.use("/stripe-payment-intent", stripe);
