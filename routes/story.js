@@ -28,13 +28,13 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
-    const query = {_id : new ObjectId(id)}
+    const query = { _id: new ObjectId(id) }
     const result = await storyCollection.findOne(query);
     res.send(result);
 })
 
 router.get('/', async (req, res) => {
-    const result =await storyCollection.find().toArray()
+    const result = await storyCollection.find().toArray()
     res.send(result)
 })
 
