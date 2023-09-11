@@ -19,6 +19,12 @@ const client = new MongoClient(uri, {
 
 const storyCollection = client.db("tripsureDB").collection("story");
 
+router.get('/', async (req, res)=>{
+    const result = await storyCollection.find().toArray()
+    res.send(result);
+})
+
+
 router.post('/', async (req, res) => {
     const body = req.body
     console.log(body)
@@ -33,10 +39,6 @@ router.get('/:id', async (req, res) => {
     res.send(result);
 })
 
-router.get('/', async (req, res) => {
-    const result = await storyCollection.find().toArray()
-    res.send(result)
-})
 
 
 module.exports = router;
