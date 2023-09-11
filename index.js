@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const morgan = require("morgan")
 
 const port = process.env.port || 1000;
 
@@ -9,6 +10,7 @@ require("dotenv").config();
 // middleware
 app.use(cors());
 app.use(express.json());
+app.use(morgan("dev"))
 
 //router here
 const categoryRoute = require("./routes/category");
@@ -32,6 +34,8 @@ const getFavoritePackage = require("./routes/getFavoritePackageData")
 const stripe = require("./routes/stripe")
 const payments = require("./routes/payments")
 const flights = require("./routes/flights")
+const sslCommerz = require("./routes/sslCommerz")
+const rentalCards = require("./routes/rentalcards")
 
 
 
@@ -40,7 +44,6 @@ const addReview = require("./routes/addReview");
 const postStory = require("./routes/postStory");
 const userguides = require("./routes/guides")
 const allresturants = require('./routes/restaurants')
-
 const story = require ('./routes/story')
 
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
@@ -91,11 +94,14 @@ async function run() {
     app.use("/getFavoritePackage", getFavoritePackage);
     app.use("/addReview", addReview);
     app.use("/postStory", postStory);
+    app.use("/story", story)
     app.use("/addguide", userguides)
     app.use("/allguide", userguides)
     app.use("/stripe-payment-intent", stripe);
     app.use("/payments", payments);
     app.use("/flights", flights);
+    app.use("/sll-commerz", sslCommerz);
+    app.use("/rentalcards", rentalCards);
   
 
 
