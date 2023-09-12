@@ -72,8 +72,8 @@ async function run() {
     app.use("/dashboard/addresturants", allresturants);
     app.use("/dashboard/packages", allpackges);
     app.use("/users", users);
-    app.use("/users/admin", users);
-    app.use("/users/operator", users);
+    app.use("/users", users);
+    app.use("/users", users);
     app.use('/users/search', users)
     app.use("/searchResult", searchAllDatas);
     // app.use("/category", categoryRoute);

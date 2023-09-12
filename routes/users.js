@@ -33,6 +33,7 @@ router.put('/:email', async (req, res) => {
 
 router.get('/', async (req, res) => {
   const result = await usersCollection.find().toArray()
+  // console.log(result)
   res.send(result)
 })
 
@@ -91,14 +92,18 @@ router.get('/:email', async (req, res) => {
   const email = req.params.email;
   const query = { email: email }
   const user = await usersCollection.findOne(query);
-  const result = { operator: user?.role === 'operator' }
+  const result = { guide: user?.role === 'guide' }
   res.send(result);
 })
 
 
 
-router.patch('/:id', async (req, res) => {
+// updated patch admin guides
+
+
+router.patch('/admin/:id', async (req, res) => {
   const id = req.params.id;
+  console.log(id);
   const filter = { _id: new ObjectId(id) };
   const updateDoc = {
     $set: {
@@ -112,18 +117,18 @@ router.patch('/:id', async (req, res) => {
 })
 
 // operator
-router.patch('/:id',async (req, res) => {
+router.patch('/operator/:id',async (req, res) => {
   const id = req.params.id;
+  console.log(id);
   const filter = { _id: new ObjectId(id) };
   const updateDoc = {
     $set: {
-      role: 'operator'
+      role: 'guide'
     },
   };
 
   const result = await usersCollection.updateOne(filter, updateDoc);
   res.send(result);
-
 })
 
 router.get("/", async (req, res) => {
@@ -143,9 +148,11 @@ router.get("/", async (req, res) => {
 
 router.delete('/:id',async(req,res) =>{
   const id = req.params.id
-
+  console.log(id)
   const query = {_id: new ObjectId(id)}
+  console.log(query)
   const result = await usersCollection.deleteOne(query)
+  console.log(result)
   res.send(result)
 })
 
