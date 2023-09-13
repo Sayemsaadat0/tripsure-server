@@ -1,54 +1,62 @@
-const express = require('express');
-// const router = require('./router');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const express = require('express'); // Import Express directly
+const expect = chai.expect;
 
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.njebycd.mongodb.net/?retryWrites=true&w=majority`;
+chai.use(chaiHttp);
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
+// Create an instance of Express app
+const app = express();
 
-const usersCollection = client.db("tripsureDB").collection("users");
+// Import your routes here
+const usersRouter = require('../routes/users');
 
-// Import the code you want to test
-const router = require('../routes/users');
+// Mount your routes
+app.use('/users', usersRouter);
 
-// Create a test suite
-describe('Users Router',  () => {
-
-  // Create a beforeEach hook to initialize the database
-  beforeEach(() => {
-    client.connect();
-    usersCollection.deleteMany({});
+describe('Users Router', () => {
+  // This test assumes that the /users endpoint returns an array of users
+  it('should get a list of users', (done) => {
+    chai.request(app)
+      .get('/users')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('array');
+        done();
+      });
   });
 
-  // Create an afterEach hook to close the database connection
-  afterEach(() => {
-    client.close();
+  // This test assumes that the /users/:email endpoint returns a user by email
+  it('should get a user by email', (done) => {
+    const userEmail = 'pj.parvaz45@gmail.com'; // Replace with an actual email
+    chai.request(app)
+      .get(`/users/${userEmail}`)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body.email).to.equal(userEmail); // Validate the email if needed
+        // Add more assertions to validate the response based on your requirements
+        done();
+      });
   });
 
-  // Write your unit tests here
-
-  it('should return the user document for a valid email address', async () => {
-    const email = 'test@example.com';
-    const user = { email, name: 'Test User' };
-    usersCollection.insertOne(user);
-
-    const result = await router.get('/' + email);
-
-    expect(result).toEqual(user);
+  // This test assumes that the /users endpoint can create a new user
+  it('should create a new user', (done) => {
+    const newUser = {
+      email: 'newuser@example.com',
+      // Add other required fields here
+    };
+    chai.request(app)
+      .post('/users')
+      .send(newUser)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('insertedId');
+        done();
+      });
   });
 
-  it('should return undefined for an invalid email address', async () => {
-    const email = 'invalid@email.com';
+  // Add more tests for other routes in your users.js module as needed
 
-    const result = await router.get('/' + email);
-
-    expect(result).toBeUndefined();
-  });
+  // Make sure to handle error cases and edge cases in your tests
 });
