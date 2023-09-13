@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const morgan = require("morgan")
 
 const port = process.env.port || 1000;
 
@@ -9,6 +10,7 @@ require("dotenv").config();
 // middleware
 app.use(cors());
 app.use(express.json());
+app.use(morgan("dev"))
 
 //router here
 const categoryRoute = require("./routes/category");

@@ -90,7 +90,7 @@ router.post('/payment/success/:transId', async(req, res) => {
         }
     })
     if (result.modifiedCount > 0) {
-        res.redirect(`http://localhost:5173/payment/success/${tranjectionId}`)
+        res.redirect(`https://tripsure-client.web.app/payment/success/${tranjectionId}`)
     }
 })
 router.post('/payment/fail/:transId', async(req, res) => {
@@ -98,7 +98,7 @@ router.post('/payment/fail/:transId', async(req, res) => {
     console.log(tranjectionId); 
     const result = await paymentCollection.deleteOne({transactionId: tranjectionId })
     if (result.deletedCount) {
-        res.redirect(`http://localhost:5173/payment/fail/${tranjectionId}`)
+        res.redirect(`https://tripsure-client.web.app/payment/fail/${tranjectionId}`)
     }
 })
 
