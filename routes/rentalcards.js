@@ -26,6 +26,13 @@ router.get('/', async (req, res) => {
     const result = await rentalCardsCollection.find().toArray();
     res.send(result);
 })
+router.get('/forpayment', async (req, res) => {
+  const id = req.query.id; 
+  console.log(id);
+  const result = await rentalCardsCollection.findOne({ _id: new ObjectId(id) });
+  res.send(result);
+});
+
 router.get('/search', async (req, res) => {
   const { location, pickUpDate,dropOffDate, unavailableDate } = req.query;
   console.log(location, pickUpDate,dropOffDate, unavailableDate);
