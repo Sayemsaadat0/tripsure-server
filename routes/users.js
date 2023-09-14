@@ -88,7 +88,7 @@ router.get('/:email', async (req, res) => {
   res.send(result);
 })
 
-// instructor
+// operator
 router.get('/:email', async (req, res) => {
   const email = req.params.email;
   const query = { email: email }
