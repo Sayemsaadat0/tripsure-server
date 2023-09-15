@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
     console.log(tour);
     
     const data = {
-        total_amount: tour?.orderDetails?.price?.totalPrice,
+        total_amount: tour?.orderDetails?.price?.totalPrice || tour?.orderDetails.daily_rate,
         currency: 'USD',
         tran_id: trans_id, // use unique tran_id for each api call
         success_url: `http://localhost:1000/sll-commerz/payment/success/${trans_id}`,
@@ -66,6 +66,7 @@ router.post("/", async (req, res) => {
     });
     const finalTourPayment = {
         user: tour?.orderDetails?.email,
+        card: tour?.orderDetails,
         transactionId: trans_id,
         price: tour?.orderDetails?.price?.totalPrice,
         tourId: tour?.orderDetails?.card?._id,
@@ -73,6 +74,7 @@ router.post("/", async (req, res) => {
         selectedDate: tour?.orderDetails?.selectedDate,
         travelerCount: tour?.orderDetails?.travelerCount,
         paidStatus: false,
+        date: new Date()
     }
     const result =  await paymentCollection.insertOne(finalTourPayment); 
 

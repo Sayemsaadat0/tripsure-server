@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.njebycd.mongodb.net/?retryWrites=true&w=majority`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -15,11 +15,24 @@ const client = new MongoClient(uri, {
 
 const rentalCardsCollection = client.db("tripsureDB").collection("rentalcars");
 
+router.get("/singleCar:/id", async (req, res) => {
+  const id = req.params.id;
+  const query = { _id : new ObjectId(id)}
+  const result = await rentalCardsCollection.findOne(query);
+  res.send(result);
+})
 
 router.get('/', async (req, res) => {
     const result = await rentalCardsCollection.find().toArray();
     res.send(result);
 })
+router.get('/forpayment', async (req, res) => {
+  const id = req.query.id; 
+  console.log(id);
+  const result = await rentalCardsCollection.findOne({ _id: new ObjectId(id) });
+  res.send(result);
+});
+
 router.get('/search', async (req, res) => {
   const { location, pickUpDate,dropOffDate, unavailableDate } = req.query;
   console.log(location, pickUpDate,dropOffDate, unavailableDate);

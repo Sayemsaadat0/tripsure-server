@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const morgan = require("morgan")
+const morgan = require("morgan");
 
 const port = process.env.port || 1000;
 
@@ -10,11 +10,12 @@ require("dotenv").config();
 // middleware
 app.use(cors());
 app.use(express.json());
-app.use(morgan("dev"))
+app.use(morgan("dev"));
 
 //router here
+const favorite = require("./routes/favorite") // this route manage favorite 
 const categoryRoute = require("./routes/category");
-const searchAllDatas = require('./routes/searchResult')
+const searchAllDatas = require("./routes/searchResult");
 const tourDetails = require("./routes/tourDetails");
 
 
@@ -24,32 +25,30 @@ const topDestinations = require("./routes/TopDestination");
 
 
 const allHotels = require("./routes/hotels");
-const allpackges = require('./routes/packages')
-const users = require('./routes/users')
-const tourCountry = require("./routes/tourCountry")
-const restaurant = require("./routes/restaurant")
-const dothingsAttractionReviews = require("./routes/doThingsAttractionReviews")
-const stayThingsAttractionReviews = require("./routes/stayThingsAttractionReviews")
-const restaurantAttractionReviews = require("./routes/restaurantAttractionReviews")
-const packages = require("./routes/packages")
-const travelDeals = require("./routes/TravelDeals")
-const allFamilyGuide = require("./routes/AllFamilyGuide")
-const familyDetails = require("./routes/familyDetails")
-const addToFavoritePackage = require("./routes/AddToFavoritePackage")
-const getFavoritePackage = require("./routes/getFavoritePackageData")
-const stripe = require("./routes/stripe")
-const payments = require("./routes/payments")
-const flights = require("./routes/flights")
-const sslCommerz = require("./routes/sslCommerz")
-const rentalCards = require("./routes/rentalcards")
-
-
-
-
+const allpackges = require("./routes/packages");
+const users = require("./routes/users");
+const tourCountry = require("./routes/tourCountry");
+const restaurant = require("./routes/restaurant");
+const dothingsAttractionReviews = require("./routes/doThingsAttractionReviews");
+const stayThingsAttractionReviews = require("./routes/stayThingsAttractionReviews");
+const restaurantAttractionReviews = require("./routes/restaurantAttractionReviews");
+const packages = require("./routes/packages");
+const travelDeals = require("./routes/TravelDeals");
+const allFamilyGuide = require("./routes/AllFamilyGuide");
+const familyDetails = require("./routes/familyDetails");
+const addToFavoritePackage = require("./routes/AddToFavoritePackage");
+const getFavoritePackage = require("./routes/getFavoritePackageData");
+const stripe = require("./routes/stripe");
+const payments = require("./routes/payments");
+const flights = require("./routes/flights");
+const sslCommerz = require("./routes/sslCommerz");
+const rentalCards = require("./routes/rentalcards");
 const addReview = require("./routes/addReview");
 const postStory = require("./routes/postStory");
 const userguides = require("./routes/guides")
 const allresturants = require('./routes/restaurants')
+const myBookings = require("./routes/myBookings");
+
 const story = require ('./routes/story')
 
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
@@ -71,6 +70,8 @@ async function run() {
     //  work on
 
     //from routes
+    app.use("/favorite", favorite); // favorite route use 
+    app.use("/searchResult", searchAllDatas);
     app.use("/category", categoryRoute);
     app.use("/tourDetails", tourDetails);
     app.use("/top-destinations", topDestinations);
@@ -79,9 +80,13 @@ async function run() {
     app.use("/dashboard/addresturants", allresturants);
     app.use("/dashboard/packages", allpackges);
     app.use("/users", users);
+    app.use('/users/search', users)
+    app.use("/category", categoryRoute);
+    app.use("/tourDetails", tourDetails);
+    app.use("/top-destinations", topDestinations);
     app.use("/users/admin", users);
     app.use("/users/operator", users);
-    app.use('/users/search', users)
+    app.use("/users/search", users);
     app.use("/searchResult", searchAllDatas);
     // app.use("/category", categoryRoute);
     // app.use("/tourDetails", tourDetails);
@@ -99,7 +104,6 @@ async function run() {
     app.use("/getFavoritePackage", getFavoritePackage);
     app.use("/addReview", addReview);
     app.use("/postStory", postStory);
-    app.use("/story", story)
     app.use("/addguide", userguides)
     app.use("/allguide", userguides)
     app.use("/stripe-payment-intent", stripe);
@@ -107,18 +111,8 @@ async function run() {
     app.use("/flights", flights);
     app.use("/sll-commerz", sslCommerz);
     app.use("/rentalcards", rentalCards);
-  
-
-
-
-
-
-
-
-
-
-
-
+    app.use("/my-bookings", myBookings);
+    app.use("/story", story)
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("connected to MongoDB!");
@@ -130,5 +124,5 @@ app.get("/", (req, res) => {
   res.send("Data base connected SuccessFully");
 });
 app.listen(port, () => {
-  console.log(`tripsure server running on port ${port}`);
+  console.log(`tripSure server running on port ${port}`);
 });
