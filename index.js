@@ -41,6 +41,7 @@ const addReview = require("./routes/addReview");
 const postStory = require("./routes/postStory");
 const userguides = require("./routes/guides")
 const allresturants = require('./routes/restaurants')
+const myBookings = require("./routes/myBookings");
 
 const story = require ('./routes/story')
 
@@ -106,7 +107,7 @@ async function run() {
     app.use("/sll-commerz", sslCommerz);
     app.use("/rentalcards", rentalCards);
     app.use("/my-bookings", myBookings);
-
+    app.use("/story", story)
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("connected to MongoDB!");

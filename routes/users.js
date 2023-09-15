@@ -75,6 +75,18 @@ router.put('/:email', async (req, res) => {
 })
 
 
+// Express route to get users registered in the last 24 hours
+router.get('/newUser', async (req, res) => {
+  // Parse the date string sent from the client
+  const clientDateStr = req.query.date;
+  const clientDate = new Date(clientDateStr);
+  console.log(clientDateStr, clientDate)
+  const twentyFourHoursAgo = new Date(clientDate.getTime() - 24 * 60 * 60 * 1000);
+  const registeredUsers = await usersCollection.find({ registerDate: { $gte: twentyFourHoursAgo } }).toArray();
+  console.log('new users', registeredUsers)
+  res.send(registeredUsers);
+
+});
 
 
 
