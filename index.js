@@ -45,11 +45,11 @@ const sslCommerz = require("./routes/sslCommerz");
 const rentalCards = require("./routes/rentalcards");
 const addReview = require("./routes/addReview");
 const postStory = require("./routes/postStory");
-const userguides = require("./routes/guides")
-const allresturants = require('./routes/restaurants')
+const userguides = require("./routes/guides");
+const allresturants = require("./routes/restaurants");
+const story = require("./routes/story");
 const myBookings = require("./routes/myBookings");
-
-const story = require ('./routes/story')
+const allMedicals = require("./routes/medicals");
 
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
@@ -104,15 +104,17 @@ async function run() {
     app.use("/getFavoritePackage", getFavoritePackage);
     app.use("/addReview", addReview);
     app.use("/postStory", postStory);
-    app.use("/addguide", userguides)
-    app.use("/allguide", userguides)
+    app.use("/addguide", userguides);
+    app.use("/allguide", userguides);
     app.use("/stripe-payment-intent", stripe);
     app.use("/payments", payments);
     app.use("/flights", flights);
     app.use("/sll-commerz", sslCommerz);
     app.use("/rentalcards", rentalCards);
     app.use("/my-bookings", myBookings);
-    app.use("/story", story)
+    app.use("/story", story);
+    app.use("/medicals", allMedicals);
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("connected to MongoDB!");

@@ -13,32 +13,17 @@ const client = new MongoClient(uri, {
   },
 });
 
-const categoryCollection = client.db("tripsureDB").collection("category");
+const medicalsCollection = client.db("tripsureDB").collection("medicals");
+
 router.get("/", async (req, res) => {
-  const result = await categoryCollection
-    .find()
-    .sort({ visitcount: 1 })
-    .limit(10)
-    .toArray();
+  const result = await medicalsCollection.find().toArray();
   res.send(result);
 });
 
 router.get("/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    if(!id){
-      return 'id  not found'
-    }
-    const query =  { _id: new ObjectId(id) }; 
-    const result = await categoryCollection.findOne(query);
-    res.status(200).send(result);
-  } catch (error) {
-    console.log("error", error);
-    res.status(500).send({ message: "Internal server error" }); 
-  }
   const id = req.params.id;
   const query = { _id: new ObjectId(id) };
-  const result = await categoryCollection.findOne(query);
+  const result = await medicalsCollection.findOne(query);
   res.send(result);
 });
 
