@@ -20,12 +20,20 @@ router.get('/', async (req, res) => {
     const result = await hotelCollection.find().toArray();
     res.send(result);
 })
-router.get('/:countryName', async (req, res) => {
-    const countryName = req.params.countryName;
-    const query = {country: {$regex : countryName,$options:"i"} }
+
+router.get('/:country', async (req, res) => {
+  const country = req.params.country;
+  const query = { country: { $regex: country, $options: 'i' } };
+
+  try {
     const result = await hotelCollection.find(query).limit(10).toArray();
     res.send(result);
-})
+  } catch (error) {
+    console.error('Error fetching hotels by country:', error);
+    res.status(500).send('An error occurred while fetching hotels.');
+  }
+});
+
 router.post("/", async (req, res) => {
   const newhotels = req.body;
   const result = await hotelCollection.insertOne(newhotels);
