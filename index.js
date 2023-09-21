@@ -17,13 +17,7 @@ const favorite = require("./routes/favorite") // this route manage favorite
 const categoryRoute = require("./routes/category");
 const searchAllDatas = require("./routes/searchResult");
 const tourDetails = require("./routes/tourDetails");
-
-
 const topDestinations = require("./routes/TopDestination");
-
-
-
-
 const allHotels = require("./routes/hotels");
 const allpackges = require("./routes/packages");
 const users = require("./routes/users");
@@ -71,7 +65,7 @@ async function run() {
 
     //from routes
     app.use("/favorite", favorite); // favorite route use 
-    app.use("/searchResult", searchAllDatas);
+    app.use("/search", searchAllDatas);
     app.use("/category", categoryRoute);
     app.use("/tourDetails", tourDetails);
     app.use("/top-destinations", topDestinations);
@@ -87,9 +81,6 @@ async function run() {
     app.use("/users/admin", users);
     app.use("/users/operator", users);
     app.use("/users/search", users);
-    app.use("/searchResult", searchAllDatas);
-    // app.use("/category", categoryRoute);
-    // app.use("/tourDetails", tourDetails);
     app.use("/all-hotels", allHotels);
     app.use("/tourCountry", tourCountry);
     app.use("/restaurant", restaurant);
