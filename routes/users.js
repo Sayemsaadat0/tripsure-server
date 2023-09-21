@@ -61,12 +61,16 @@ router.patch('/:email', async (req, res) => {
 router.put('/:email', async (req, res) => {
   const email = req.params.email
   const body = req.body
+  console.log(body)
   const query = { email: email }
   const updateDoc = {
     $set: {
       phone: body.phone,
       gender: body.gender,
-      country: body.country
+      country: body.country,
+      bio: body.bio,
+      birthDate: birthDate,
+      comfortableLanguage: body.comfortableLanguage 
     }
   }
   const result = await usersCollection.updateOne(query, updateDoc)
