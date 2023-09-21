@@ -26,5 +26,14 @@ router.get("/:id", async (req, res) => {
   const result = await medicalsCollection.findOne(query);
   res.send(result);
 });
+router.get("/disease/:text", async (req, res) => {
+  const text = req.params.text;
+  const query = { specialties: text };
+  const result = await medicalsCollection.find(query).toArray();
+  res.send(result);
+  console.log(result)
+});
+
+
 
 module.exports = router;
