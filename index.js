@@ -67,13 +67,11 @@ async function run() {
     app.use("/favorite", favorite); // favorite route use 
     app.use("/search", searchAllDatas);
     app.use("/category", categoryRoute);
-    app.use("/tourDetails", tourDetails);
     app.use("/dashboard/addhotels", allHotels);
     app.use("/dashboard/addresturants", allresturants);
     app.use("/dashboard/packages", allpackges);
     app.use("/users", users);
     app.use('/users/search', users)
-    app.use("/category", categoryRoute);
     app.use("/tourDetails", tourDetails);
     app.use("/top-destinations", topDestinations);
     app.use("/users/admin", users);
