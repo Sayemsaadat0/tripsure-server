@@ -69,7 +69,6 @@ async function run() {
     app.use("/category", categoryRoute);
     app.use("/tourDetails", tourDetails);
     app.use("/top-destinations", topDestinations);
-    app.use("/all-hotels", topDestinations);
     app.use("/dashboard/addhotels", allHotels);
     app.use("/dashboard/addresturants", allresturants);
     app.use("/dashboard/packages", allpackges);
