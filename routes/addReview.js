@@ -14,19 +14,10 @@ const client = new MongoClient(uri, {
 
 const addReviewCollection = client.db("tripsureDB").collection("review");
 
-router.put("/:email", async (req, res) => {
+router.post("/:email", async (req, res) => {
   const email = req.params.email;
   const review = req.body;
-  const filter = { email: email };
-  const options = { upsert: true };
-  const updateDoc = {
-    $set: review,
-  };
-  const result = await addReviewCollection.updateOne(
-    filter,
-    updateDoc,
-    options
-  );
+  const result = await addReviewCollection.insertOne(review)
   res.send(result);
 });
 
